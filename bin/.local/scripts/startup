@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
 
-ibus engine xkb:us::eng >/dev/null 2>&1 &
-exec setxkbmap -option caps:ctrl_modifier
+ibus-daemon -d
+
+sleep 1
+
+EN_ibus="xkb:us::eng"
+ibus engine "$EN_ibus"
+
+setxkbmap -option caps:ctrl_modifier
+
+xinput set-prop "ELAN1203:00 04F3:307A Touchpad" "libinput Tapping Enabled" 1
