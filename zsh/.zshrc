@@ -105,8 +105,6 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
 # aliases
 alias vim='nvim'
 alias vmi='nvim'
@@ -121,11 +119,11 @@ alias dk="setxkbmap -option"
 alias ck="setxkbmap -option caps:ctrl_modifier"
 
 # neovim configs
-alias vimc="NVIM_APPNAME=nvim-clean-config nvim"   # clean config
-alias vimt="NVIM_APPNAME=nvim-testing-config nvim" # testing config
+# alias vimc="NVIM_APPNAME=nvim-clean-config nvim"   # clean config
+# alias vimt="NVIM_APPNAME=nvim-testing-config nvim" # testing config
 
 # search directories
-alias sd="cd \$(find ~ ~/study/ ~/personal/ ~/personal/react/ ~/personal/faround/ -mindepth 1 -maxdepth 1 -type d | fzf)"
+alias sd="cd \$(find ~ ~/work ~/personal/ ~/personal/playground ~/personal/playground/ruby ~/personal/playground/rails -mindepth 1 -maxdepth 1 -type d | fzf)"
 
 # search all working directories
 alias wd="tmux-sessionizer"

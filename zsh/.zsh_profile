@@ -1,5 +1,6 @@
-export XDG_CONFIG_HOME=$HOME/.config
-export NVIM_APPNAME=nvim
+export PATH="$GEM_HOME/bin:$PATH"
+
+export XDG_CONFIG_HOME=$HOME/.config export NVIM_APPNAME=nvim
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
@@ -8,8 +9,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 VIM="nvim"
 
 # this is very nice
-bindkey -s ^f "tmux-sessionizer\n"
-bindkey -s ^s "cd \$(find ~ ~/study/ ~/personal/ ~/personal/react/ ~/personal/faround/ -mindepth 1 -maxdepth 1 -type d | fzf)\n"
+bindkey -s '^f' "tmux-sessionizer\n"
+bindkey -s '^s' "cd \$(find ~ ~/personal/ ~/personal/playground ~/personal/playground/ruby ~/personal/playground/rails -mindepth 1 -maxdepth 1 -type d | fzf)\n"
 
 # functions
 take() {
@@ -17,7 +18,7 @@ take() {
     cd $1
 }
 
-note() {
+draft() {
     if [ $# -eq 0 ]; then
         echo "No arguments supplied"
         echo "-- Usage -- "
@@ -26,20 +27,61 @@ note() {
         echo "> write <message>: take note"
         return
     fi
-    if [ $1 = "list" ]; then
-        cat ~/personal/_notes.txt
-    elif [ $1 = "edit" ]; then
-        nvim ~/personal/_notes.txt
-    elif [ $1 = "write" ]; then
-        echo "date : $(date)" >> $HOME/personal/_notes.txt
-        echo "msg  : ${@:2}" >> $HOME/personal/_notes.txt
-        echo "" >> $HOME/personal/_notes.txt
+    if [ $1 = "list" ] || [ $1 = "l" ] ; then
+        cat ~/personal/_draft.txt
+    elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
+        nvim ~/personal/_draft.txt
+    elif [ $1 = "write" ] || [ $1 = "w" ]; then
+        echo "date : $(date)" >> $HOME/personal/_draft.txt
+        echo "msg  : ${@:2}" >> $HOME/personal/_draft.txt
+        echo "" >> $HOME/personal/_draft.txt
     else
         echo "Argument is not correct"
         echo "-- Usage -- "
-        echo "> list : view all notes"
-        echo "> edit : open notes.txt to edit"
-        echo "> write <message>: take note"
+        echo "> l/list : view all notes"
+        echo "> e/edit - o/open: open draft.txt to edit"
+        echo "> w/write <message>: take note"
+    fi
+}
+
+note() {
+    date=""
+    time="unk_time"
+    message=""
+
+    if [ $1 = "list" ] || [ $1 = "l" ] ; then
+        cat $HOME/personal/_note.txt
+    elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
+        nvim $HOME/personal/_note.txt
+    else
+        while getopts "d:t:m:" opt; do
+            case $opt in
+                d)
+                    date="$OPTARG"
+                    ;;
+                t)
+                    time="$OPTARG"
+                    ;;
+                m)
+                    message="$OPTARG"
+                    ;;
+                \?)
+                    echo "Invalid option: -$OPTARG" >&2
+                    ;;
+                :)
+                    echo "Option -$OPTARG requires an argument." >&2
+                    ;;
+            esac
+        done
+
+        if [ -z "$date" ] || [ -z "$message" ]; then
+            echo "Usage: $0 -d <date> -t <time> -m <message>"
+            echo "Need to provide -d and -t options"
+        else
+            echo "> $date $time, msg: $message\n" >> $HOME/personal/_note.txt
+            echo "Note added: #at [$date $time]: $message"
+        fi
+
     fi
 }
 
