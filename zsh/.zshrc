@@ -129,10 +129,10 @@ alias sd="cd \$(find ~ ~/work ~/personal/ ~/personal/playground ~/personal/playg
 alias wd="tmux-sessionizer"
 
 # switching keyboard layout
-EN_ibus="xkb:us::eng"
-VN_ibus="Bamboo"
-alias ken='ibus engine $EN_ibus'
-alias kvi='ibus engine $VN_ibus'
+# EN_ibus="xkb:us::eng"
+# VN_ibus="Bamboo"
+alias ken='ibus engine xkb:us::eng'
+alias kvi='ibus engine Bamboo'
 
 source $HOME/.zsh_profile
 

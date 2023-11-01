@@ -13,7 +13,7 @@ set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:JetBrainsMono Nerd Font Medium 12px
+font pango:monospace 12px
 
 for_window [class="^.*"] border pixel 2
 # for_window [class="kitty"] border pixel 0
@@ -197,12 +197,15 @@ bar {
         position bottom
 }
 
+assign [class="marktext"] 5
+assign [class="discord"] 9
+
 # exec --no-startup-id i3-msg 'workspace 2; exec firefox; workspace 3; exec kitty; workspace 2'
 
 exec --no-startup-id "startup"
 # exec --no-startup-id nitrogen --restore
 
-bindsym $mod+c exec "changelanguage"
+bindsym $mod+m exec "changelanguage"
 
 # Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/screenshots/$(date).png"

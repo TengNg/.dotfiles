@@ -1,6 +1,7 @@
 export PATH="$GEM_HOME/bin:$PATH"
 
-export XDG_CONFIG_HOME=$HOME/.config export NVIM_APPNAME=nvim
+export XDG_CONFIG_HOME=$HOME/.config
+export NVIM_APPNAME=nvim
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
