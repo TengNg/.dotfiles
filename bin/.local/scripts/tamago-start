@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Create a new Tmux session
+tmux new-session -d -s task-manager-session -n "controller" -c ~/personal/task-manager/server
+
+# Split the first window into three panes
+tmux split-window -h -c ~/personal/task-manager/client
+tmux split-window -v -c ~/personal/task-manager/socket
+
+# Create a new window named "client" and select it
+tmux new-window -n "main" -c ~/personal/task-manager/
+tmux select-pane -t 1
+
+# Attach to the Tmux session
+tmux attach-session -t task-manager-session
+
