@@ -55,8 +55,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 1 # decrease screen 
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec kitty
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 # start firefox
 bindsym $mod+0 exec firefox
@@ -155,6 +154,11 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
+
+# this is pretty good
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Ctrl+l workspace next
+bindsym $mod+Ctrl+h workspace prev
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
