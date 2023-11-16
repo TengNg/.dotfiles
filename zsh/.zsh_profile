@@ -9,9 +9,11 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 VIM="nvim"
 
+export GIT_EDITOR=$VIM
+
 # this is very nice
 bindkey -s '^f' "tmux-sessionizer\n"
-bindkey -s '^s' "cd \$(find ~ ~/personal/ ~/personal/playground ~/personal/playground/ruby ~/personal/playground/rails -mindepth 1 -maxdepth 1 -type d | fzf)\n"
+bindkey -s '^s' "cd \$(find ~ ~/work ~/personal/ ~/personal/playground ~/personal/playground/ruby ~/personal/playground/rails -mindepth 1 -maxdepth 1 -type d | fzf)\n"
 
 # functions
 take() {
