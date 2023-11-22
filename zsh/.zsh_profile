@@ -1,24 +1,28 @@
-export PATH="$GEM_HOME/bin:$PATH"
-
 export XDG_CONFIG_HOME=$HOME/.config
 export NVIM_APPNAME=nvim
+VIM="nvim"
+
+export PATH="$GEM_HOME/bin:$PATH"
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-VIM="nvim"
 
 export GIT_EDITOR=$VIM
 
 # this is very nice
 bindkey -s '^f' "tmux-sessionizer\n"
-bindkey -s '^s' "cd \$(find ~ ~/work ~/personal/ ~/personal/playground ~/personal/playground/ruby ~/personal/playground/rails -mindepth 1 -maxdepth 1 -type d | fzf)\n"
+bindkey -s '^s' "cd \$(find ~ ~/work ~/personal/ ~/personal/testing ~/personal/playground ~/personal/playground/rails -mindepth 1 -maxdepth 1 -type d | fzf)\n"
 
 # functions
 take() {
     mkdir -p $1
     cd $1
+}
+
+catr() {
+    tail -n "+$1" $3 | head -n "$(($2 - $1 + 1))"
 }
 
 draft() {
@@ -48,6 +52,40 @@ draft() {
 }
 
 note() {
+    note_file="$HOME/personal/_draft.txt"
+    if [ $1 = "list" ] || [ $1 = "l" ] ; then
+        cat note_file
+    elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
+        nvim note_file
+    else
+        timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+        while [[ $# -gt 0 ]]; do
+            case "$1" in
+                -m|--message)
+                    shift
+                    message="$1"
+                    ;;
+                *)
+                    echo "Invalid argument: $1"
+                    exit 1
+                    ;;
+            esac
+            shift
+        done
+
+        if [ -z "$message" ]; then
+            echo "Please provide a message using -m or --message."
+            exit 1
+        fi
+
+        echo "$timestamp" >> "$note_file"
+        echo "> $message" >> "$note_file"
+        echo ""
+        echo "Note added to $note_file."
+    fi
+}
+
+timeline() {
     date=""
     time="unk_time"
     message=""
@@ -81,8 +119,8 @@ note() {
             echo "Usage: $0 -d <date> -t <time> -m <message>"
             echo "Need to provide -d and -t options"
         else
-            echo "> $date $time, msg: $message\n" >> $HOME/personal/_note.txt
-            echo "Note added: #at [$date $time]: $message"
+            echo "> $date $time, msg: $message\n" >> $HOME/personal/_timeline.txt
+            echo "Timeline added: #at [$date $time]: $message"
         fi
 
     fi

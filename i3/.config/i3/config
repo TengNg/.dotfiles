@@ -207,7 +207,6 @@ assign [class="discord"] 9
 # exec --no-startup-id i3-msg 'workspace 2; exec firefox; workspace 3; exec kitty; workspace 2'
 
 exec --no-startup-id "startup"
-# exec --no-startup-id nitrogen --restore
 
 bindsym $mod+m exec "changelanguage"
 
@@ -223,4 +222,7 @@ bindsym $mod+Shift+A exec --no-startup-id maim --select | xclip -selection clipb
 
 # for my laptop
 exec xinput set-prop "ELAN1203:00 04F3:307A Touchpad" "libinput Tapping Enabled" 1
+
+# wallpapers :)
+# exec --no-startup-id nitrogen --restore
 
