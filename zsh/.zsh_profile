@@ -26,6 +26,7 @@ catr() {
 }
 
 draft() {
+    draft_file=$HOME/personal/_draft.txt
     if [ $# -eq 0 ]; then
         echo "No arguments supplied"
         echo "-- Usage -- "
@@ -39,9 +40,9 @@ draft() {
     elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
         nvim ~/personal/_draft.txt
     elif [ $1 = "write" ] || [ $1 = "w" ]; then
-        echo "date : $(date)" >> $HOME/personal/_draft.txt
-        echo "msg  : ${@:2}" >> $HOME/personal/_draft.txt
-        echo "" >> $HOME/personal/_draft.txt
+        echo "date : $(date)" >> $draft_file
+        echo "msg  : ${@:2}" >> $draft_file
+        echo "" >> $draft_file
     else
         echo "Argument is not correct"
         echo "-- Usage -- "
@@ -52,11 +53,11 @@ draft() {
 }
 
 note() {
-    note_file="$HOME/personal/_draft.txt"
+    note_file=$HOME/personal/_note.txt
     if [ $1 = "list" ] || [ $1 = "l" ] ; then
-        cat note_file
+        cat $note_file
     elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
-        nvim note_file
+        nvim $note_file
     else
         timestamp=$(date +"%Y-%m-%d %H:%M:%S")
         while [[ $# -gt 0 ]]; do
@@ -67,7 +68,6 @@ note() {
                     ;;
                 *)
                     echo "Invalid argument: $1"
-                    exit 1
                     ;;
             esac
             shift
@@ -75,25 +75,25 @@ note() {
 
         if [ -z "$message" ]; then
             echo "Please provide a message using -m or --message."
-            exit 1
+        else
+            echo "[$timestamp] > $message" >> $note_file
+            echo "" >> $note_file
+            echo "Note added: $message"
         fi
-
-        echo "$timestamp" >> "$note_file"
-        echo "> $message" >> "$note_file"
-        echo ""
-        echo "Note added to $note_file."
     fi
 }
 
 timeline() {
     date=""
-    time="unk_time"
     message=""
+    time="unk_time"
+
+    timeline_file=$HOME/personal/_timeline.txt
 
     if [ $1 = "list" ] || [ $1 = "l" ] ; then
-        cat $HOME/personal/_note.txt
+        cat $timeline_file
     elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
-        nvim $HOME/personal/_note.txt
+        nvim $timeline_file
     else
         while getopts "d:t:m:" opt; do
             case $opt in
@@ -119,7 +119,7 @@ timeline() {
             echo "Usage: $0 -d <date> -t <time> -m <message>"
             echo "Need to provide -d and -t options"
         else
-            echo "> $date $time, msg: $message\n" >> $HOME/personal/_timeline.txt
+            echo "> $date $time, msg: $message\n" >>$timeline_file
             echo "Timeline added: #at [$date $time]: $message"
         fi
 
