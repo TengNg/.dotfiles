@@ -2,6 +2,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export NVIM_APPNAME=nvim
 VIM="nvim"
 
+export DOTFILES=$HOME/.dotfiles
 export PATH="$GEM_HOME/bin:$PATH"
 
 export ANDROID_HOME=$HOME/Android/Sdk
