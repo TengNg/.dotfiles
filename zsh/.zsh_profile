@@ -9,6 +9,8 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+export POSTGRES_USERNAME=myapp
+export POSTGRES_PASSWORD=abcd1234
 
 export GIT_EDITOR=$VIM
 
@@ -27,7 +29,7 @@ catr() {
 }
 
 draft() {
-    draft_file=$HOME/personal/_draft.txt
+    draft_file=$HOME/personal/_messages/draft.txt
     if [ $# -eq 0 ]; then
         echo "No arguments supplied"
         echo "-- Usage -- "
@@ -37,9 +39,9 @@ draft() {
         return
     fi
     if [ $1 = "list" ] || [ $1 = "l" ] ; then
-        cat ~/personal/_draft.txt
+        cat $draft_file
     elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
-        nvim ~/personal/_draft.txt
+        nvim $draft_file
     elif [ $1 = "write" ] || [ $1 = "w" ]; then
         echo "date : $(date)" >> $draft_file
         echo "msg  : ${@:2}" >> $draft_file
@@ -54,7 +56,7 @@ draft() {
 }
 
 note() {
-    note_file=$HOME/personal/_note.txt
+    note_file=$HOME/personal/_messages/note.txt
     if [ $1 = "list" ] || [ $1 = "l" ] ; then
         cat $note_file
     elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
@@ -89,7 +91,7 @@ timeline() {
     message=""
     time="unk_time"
 
-    timeline_file=$HOME/personal/_timeline.txt
+    timeline_file=$HOME/personal/_messages/timeline.txt
 
     if [ $1 = "list" ] || [ $1 = "l" ] ; then
         cat $timeline_file
