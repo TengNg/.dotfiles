@@ -211,6 +211,7 @@ assign [title="Thunderbird"] 9
 exec --no-startup-id "startup"
 
 bindsym $mod+m exec "changelanguage"
+bindsym $mod+p move workspace to output left
 
 # Screenshots
 # bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/screenshots/$(date).png"
@@ -226,5 +227,5 @@ bindsym $mod+Shift+A exec --no-startup-id maim --select | xclip -selection clipb
 exec xinput set-prop "ELAN1203:00 04F3:307A Touchpad" "libinput Tapping Enabled" 1
 
 # wallpapers :)
-# exec --no-startup-id nitrogen --restore
+exec --no-startup-id nitrogen --restore
 
