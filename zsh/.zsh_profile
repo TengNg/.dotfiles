@@ -9,9 +9,6 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-export POSTGRES_USERNAME=myapp
-export POSTGRES_PASSWORD=abcd1234
-
 export GIT_EDITOR=$VIM
 
 # this is very nice
@@ -19,6 +16,7 @@ bindkey -s '^f' "tmux-sessionizer\n"
 bindkey -s '^s' "cd \$(find ~ ~/work ~/personal/ ~/personal/testing ~/personal/playground ~/personal/playground/rails -mindepth 1 -maxdepth 1 -type d | fzf)\n"
 
 # functions
+
 take() {
     mkdir -p $1
     cd $1

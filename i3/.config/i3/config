@@ -226,6 +226,9 @@ bindsym $mod+Shift+A exec --no-startup-id maim --select | xclip -selection clipb
 # for my laptop
 exec xinput set-prop "ELAN1203:00 04F3:307A Touchpad" "libinput Tapping Enabled" 1
 
+# monitor
+exec ~/.local/bin/set-monitor
+
 # wallpapers :)
-exec --no-startup-id nitrogen --restore
+# exec --no-startup-id nitrogen --restore
 

@@ -130,3 +130,6 @@ alias wd="tmux-sessionizer"
 
 source $HOME/.zsh_profile
 
+# note list
+
+eval "$(starship init zsh)"
