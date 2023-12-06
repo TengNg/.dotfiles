@@ -122,14 +122,9 @@ alias ck="setxkbmap -option caps:ctrl_modifier"
 # alias vimc="NVIM_APPNAME=nvim-clean-config nvim"   # clean config
 # alias vimt="NVIM_APPNAME=nvim-testing-config nvim" # testing config
 
-# search directories
 alias sd="cd \$(find ~ ~/work ~/personal/ ~/personal/testing ~/personal/playground ~/personal/playground/rails -mindepth 1 -maxdepth 1 -type d | fzf)"
-
-# search all working directories
 alias wd="tmux-sessionizer"
 
 source $HOME/.zsh_profile
 
-# note list
-
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
