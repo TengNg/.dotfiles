@@ -201,8 +201,6 @@ bar {
         position bottom
 }
 
-# exec --no-startup-id i3-msg 'workspace 2; exec firefox; workspace 3; exec kitty; workspace 2'
-
 assign [class="marktext"] 5
 assign [class="discord"] 8
 assign [title="Skype"] 9
@@ -229,3 +227,6 @@ exec --no-startup-id nitrogen --restore
 # for my laptop
 exec xinput set-prop "ELAN1203:00 04F3:307A Touchpad" "libinput Tapping Enabled" 1
 
+# since i have many apps run on startup, a little delay is ok :)
+exec --no-startup-id sleep 1 && i3-msg 'workspace 3; exec i3-sensible-terminal'
+exec --no-startup-id sleep 1 && i3-msg 'workspace 2; exec firefox'
