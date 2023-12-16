@@ -117,6 +117,8 @@ alias tn="tmux-new"
 # gnome desktop: gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier']"
 alias dk="setxkbmap -option"
 alias ck="setxkbmap -option caps:ctrl_modifier"
+alias DK="setxkbmap -option"
+alias CK="setxkbmap -option caps:ctrl_modifier"
 
 # neovim configs
 # alias vimc="NVIM_APPNAME=nvim-clean-config nvim"   # clean config

@@ -1,7 +1,10 @@
 [character]
 success_symbol = '[>](bold green)'
-error_symbol = '[x](bold red)'
+error_symbol = '[>](bold red)'
 vimcmd_symbol = "[<](bold green)"
+
+[package]
+disabled = true
 
 [git_commit]
 tag_symbol = " tag "
@@ -27,9 +30,6 @@ symbol = "rs "
 
 [python]
 symbol = "py "
-
-[package]
-symbol = "pkg "
 
 [aws]
 symbol = "aws "
