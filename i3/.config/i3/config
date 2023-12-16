@@ -230,3 +230,4 @@ exec xinput set-prop "ELAN1203:00 04F3:307A Touchpad" "libinput Tapping Enabled"
 # since i have many apps run on startup, a little delay is ok :)
 exec --no-startup-id sleep 1 && i3-msg 'workspace 3; exec i3-sensible-terminal'
 exec --no-startup-id sleep 1 && i3-msg 'workspace 2; exec firefox'
+# exec --no-startup-id sleep 2 && i3-msg 'workspace 1; exec google-chrome --profile-directory="Default"'
