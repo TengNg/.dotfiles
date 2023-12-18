@@ -16,7 +16,6 @@ set $mod Mod1
 font pango:monospace 12px
 
 for_window [class="^.*"] border pixel 1
-# for_window [class="kitty"] border pixel 0
 # for_window [title="^Android Emulator*"] floating enable
 # for_window [title="^Android Emulator.+:[0-9]+$"] floating enable
 
@@ -198,15 +197,13 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
-        position bottom
+        tray_output primary
 }
 
 assign [class="marktext"] 5
 assign [class="discord"] 8
 assign [title="Skype"] 9
 assign [title="Thunderbird"] 9
-
-exec --no-startup-id "startup"
 
 bindsym $mod+m exec "changelanguage"
 bindsym $mod+p move workspace to output left
@@ -221,13 +218,16 @@ bindsym Print exec --no-startup-id maim | xclip -selection clipboard -t image/pn
 bindsym Shift+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym $mod+Shift+A exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
-# wallpapers :)
-exec --no-startup-id nitrogen --restore
+# monitor
+bindsym $mod+Shift+s exec --no-startup-id "set-monitor"
 
-# for my laptop
-exec xinput set-prop "ELAN1203:00 04F3:307A Touchpad" "libinput Tapping Enabled" 1
+# suspend
+bindsym $mod+Shift+period exec systemctl suspend
 
-# since i have many apps run on startup, a little delay is ok :)
-exec --no-startup-id sleep 1 && i3-msg 'workspace 3; exec i3-sensible-terminal'
-exec --no-startup-id sleep 1 && i3-msg 'workspace 2; exec firefox'
-# exec --no-startup-id sleep 2 && i3-msg 'workspace 1; exec google-chrome --profile-directory="Default"'
+# startup script
+exec --no-startup-id "startup"
+
+# a little delay is ok :)
+exec --no-startup-id sleep 2 && i3-msg 'workspace 3; exec i3-sensible-terminal'
+exec --no-startup-id sleep 2 && i3-msg 'workspace 2; exec firefox'
+
