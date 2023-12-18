@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 
 ibus-daemon -d
+
+sleep 2
+
+EN_ibus="xkb:us::eng"
+ibus engine "$EN_ibus"
+
 setxkbmap -option caps:ctrl_modifier

@@ -112,7 +112,6 @@ alias ivm='nvim'
 alias l='ls'
 alias sl='ls'
 alias so="source ~/.zshrc"
-alias tn="tmux-new"
 
 # gnome desktop: gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier']"
 alias dk="setxkbmap -option"
