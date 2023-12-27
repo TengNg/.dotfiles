@@ -20,7 +20,7 @@ cpu_temperature 0 {
 }
 
 disk "/" {
-        format = " %free (%avail) "
+        format = " DISK %free (%avail) "
 }
 
 volume master {
