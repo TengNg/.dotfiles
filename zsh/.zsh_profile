@@ -1,23 +1,37 @@
 export XDG_CONFIG_HOME=$HOME/.config
 export NVIM_APPNAME=nvim
-
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
 VIM="nvim"
 
+export DOTFILES=$HOME/.dotfiles
+export PATH="$GEM_HOME/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+
+# export ANDROID_HOME=$HOME/Android/Sdk
+# export PATH=$PATH:$ANDROID_HOME/emulator
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export GIT_EDITOR=$VIM
+
 # this is very nice
-bindkey -s ^f "tmux-sessionizer\n"
-bindkey -s ^s "cd \$(find ~ ~/study/ ~/personal/ ~/personal/react/ ~/personal/faround/ -mindepth 1 -maxdepth 1 -type d | fzf)\n"
+bindkey -s '^f' "tmux-sessionizer\n"
+bindkey -s '^s' "cd \$(find ~ ~/personal/ ~/personal/playground ~/personal/testing ~/personal/markdown ~/work ~/work/tmp ~/work/playground -mindepth 1 -maxdepth 1 -type d | fzf)\n"
 
 # functions
-take() {
-    mkdir -p $1
-    cd $1
+
+catr() {
+    tail -n "+$1" $3 | head -n "$(($2 - $1 + 1))"
 }
 
-note() {
+rcatr() {
+    tail -n "$1" $2 | tac
+}
+
+cat1Line() {
+    cat $1 | tr -d "\n"
+}
+
+draft() {
+    draft_file=$HOME/personal/_messages/draft.txt
     if [ $# -eq 0 ]; then
         echo "No arguments supplied"
         echo "-- Usage -- "
@@ -26,20 +40,93 @@ note() {
         echo "> write <message>: take note"
         return
     fi
-    if [ $1 = "list" ]; then
-        cat ~/personal/_notes.txt
-    elif [ $1 = "edit" ]; then
-        nvim ~/personal/_notes.txt
-    elif [ $1 = "write" ]; then
-        echo "date : $(date)" >> $HOME/personal/_notes.txt
-        echo "msg  : ${@:2}" >> $HOME/personal/_notes.txt
-        echo "" >> $HOME/personal/_notes.txt
+    if [ $1 = "list" ] || [ $1 = "l" ] ; then
+        cat $draft_file
+    elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
+        nvim $draft_file
+    elif [ $1 = "write" ] || [ $1 = "w" ]; then
+        echo "date : $(date)" >> $draft_file
+        echo "msg  : ${@:2}" >> $draft_file
+        echo "" >> $draft_file
     else
         echo "Argument is not correct"
         echo "-- Usage -- "
-        echo "> list : view all notes"
-        echo "> edit : open notes.txt to edit"
-        echo "> write <message>: take note"
+        echo "> l/list : view all notes"
+        echo "> e/edit - o/open: open draft.txt to edit"
+        echo "> w/write <message>: take note"
     fi
 }
 
+note() {
+    note_file=$HOME/personal/_messages/note.txt
+    if [ $1 = "list" ] || [ $1 = "l" ] ; then
+        cat $note_file
+    elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
+        nvim $note_file
+    else
+        timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+        while [[ $# -gt 0 ]]; do
+            case "$1" in
+                -m|--message)
+                    shift
+                    message="$1"
+                    ;;
+                *)
+                    echo "Invalid argument: $1"
+                    ;;
+            esac
+            shift
+        done
+
+        if [ -z "$message" ]; then
+            echo "Please provide a message using -m or --message."
+        else
+            echo "[$timestamp] > $message" >> $note_file
+            echo "" >> $note_file
+            echo "Note added: $message"
+        fi
+    fi
+}
+
+timeline() {
+    date=""
+    message=""
+    time="unk_time"
+
+    timeline_file=$HOME/personal/_messages/timeline.txt
+
+    if [ $1 = "list" ] || [ $1 = "l" ] ; then
+        cat $timeline_file
+    elif [ $1 = "edit" ] || [ $1 = "e" ] || [ $1 = "open" ] || [ $1 = "o" ]; then
+        nvim $timeline_file
+    else
+        while getopts "d:t:m:" opt; do
+            case $opt in
+                d)
+                    date="$OPTARG"
+                    ;;
+                t)
+                    time="$OPTARG"
+                    ;;
+                m)
+                    message="$OPTARG"
+                    ;;
+                \?)
+                    echo "Invalid option: -$OPTARG" >&2
+                    ;;
+                :)
+                    echo "Option -$OPTARG requires an argument." >&2
+                    ;;
+            esac
+        done
+
+        if [ -z "$date" ] || [ -z "$message" ]; then
+            echo "Usage: $0 -d <date> -t <time> -m <message>"
+            echo "Need to provide -d and -t options"
+        else
+            echo "> $date $time, msg: $message\n" >>$timeline_file
+            echo "Timeline added: #at [$date $time]: $message"
+        fi
+
+    fi
+}

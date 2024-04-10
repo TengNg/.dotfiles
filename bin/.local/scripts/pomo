@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function notify {
+    notify-send -i "" -t 0 "Pomodoro Timer" "$1"
+}
+
+POMODORO_DURATION=$((25 * 60))
+BREAK_DURATION=$((5 * 60))
+
+notify "Pomodoro started! Time to focus for 25 minutes."
+sleep $POMODORO_DURATION
+
+notify "Pomodoro ended! Take a short break for 5 minutes."
+sleep $BREAK_DURATION
+
+notify "Pomodoro session completed!"
+

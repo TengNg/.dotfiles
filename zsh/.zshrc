@@ -109,8 +109,6 @@ export NVM_DIR="$HOME/.nvm"
 alias vim='nvim'
 alias vmi='nvim'
 alias ivm='nvim'
-alias l='ls'
-alias sl='ls'
 alias so="source ~/.zshrc"
 alias tn="tmux-new"
 
@@ -123,7 +121,7 @@ alias vimc="NVIM_APPNAME=nvim-clean-config nvim"   # clean config
 alias vimt="NVIM_APPNAME=nvim-testing-config nvim" # testing config
 
 # search directories
-alias sd="cd \$(find ~ ~/study/ ~/personal/ ~/personal/react/ ~/personal/faround/ -mindepth 1 -maxdepth 1 -type d | fzf)"
+alias sd="cd \$(find ~ ~/personal/ ~/personal/playground ~/personal/testing ~/personal/markdown ~/work ~/work/tmp ~/work/playground -mindepth 1 -maxdepth 1 -type d | fzf)"
 
 # search all working directories
 alias wd="tmux-sessionizer"
@@ -135,4 +133,8 @@ alias ken='ibus engine $EN_ibus'
 alias kvi='ibus engine $VN_ibus'
 
 source $HOME/.zsh_profile
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# eval "$(starship init zsh)"
 
