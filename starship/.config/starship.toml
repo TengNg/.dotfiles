@@ -20,15 +20,11 @@ add_newline = false
 success_symbol = '[‣](bold green)'
 error_symbol = '[‣](bold red)'
 
-# [character]
-# success_symbol = '[➜](bold green)'
-# error_symbol = '[➜](bold red)'
-
-[directory]
-style = "#8082e5 bold"
-
 [package]
 disabled = true
+
+# [directory]
+# style = "bold blue"
 
 # [time]
 # disabled = true
