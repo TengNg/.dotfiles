@@ -125,6 +125,9 @@ alias CK="setxkbmap -option caps:ctrl_modifier"
 # search directories
 alias sd="cd \$(find ~ ~/work ~/work/* ~/personal/ ~/personal/testing/ -mindepth 1 -maxdepth 1 -type d | fzf)"
 
+# list notes
+alias list-notes="~/.local/bin/list-notes"
+
 # switching keyboard layout
 EN_ibus="xkb:us::eng"
 VN_ibus="Bamboo"
@@ -133,8 +136,5 @@ alias kvi='ibus engine $VN_ibus'
 
 source $HOME/.zsh_profile
 
-# eval "$(starship init zsh)"
-
-. "/home/dtien/.deno/env"
-export PATH="/home/dtien/.config/herd-lite/bin:$PATH"
-export PHP_INI_SCAN_DIR="/home/dtien/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+# . "/home/dtien/.deno/env"
+eval "$(starship init zsh)"
