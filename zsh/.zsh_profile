@@ -15,6 +15,7 @@ export GIT_EDITOR=$VIM
 # this is very nice
 bindkey -s '^f' "~/.local/bin/tmux-sessionizer\n"
 bindkey -s '^s' "cd \$(find ~ ~/work ~/work/* ~/personal/ ~/personal/testing/ -mindepth 1 -maxdepth 1 -type d | fzf)\n"
+bindkey -s '^n' "~/.local/bin/list-notes\n"
 
 # functions
 
@@ -31,7 +32,7 @@ cat1Line() {
 }
 
 draft() {
-    draft_file=$HOME/personal/_messages/draft.txt
+    draft_file=$HOME/personal/_notes/draft.txt
     echo "date: $(date)" >> $draft_file
     echo "$@" >> $draft_file
     echo "" >> $draft_file
