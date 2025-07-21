@@ -110,6 +110,10 @@ alias vmi='nvim'
 alias ivm='nvim'
 alias so="source ~/.zshrc"
 
+alias power-low="powerprofilesctl set power-saver"
+alias power-default="powerprofilesctl set balanced"
+alias power-high="powerprofilesctl set performance"
+
 # gnome desktop: gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier']"
 alias dk="setxkbmap -option"
 alias DK="setxkbmap -option"
